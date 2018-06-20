@@ -13,9 +13,11 @@ addons:
       - g++-4.8
       - gcc-4.8
       - libzmq3-dev
+      - lynx
 
 script:
   - npm run test
   - npm run jshint
 after_success:
   - npm run coveralls
+  - if [ -f /home/travis/build/leandroBorgesFerreira/MoreCLoseButton/app/build/outputs/lint-results-debug.html ]; then lynx -dump /home/travis/build/leandroBorgesFerreira/MoreCLoseButton/app/build/outputs/lint-results-debug.html; fi
