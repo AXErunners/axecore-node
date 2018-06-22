@@ -81,7 +81,7 @@ There are several add-on services available to extend the functionality of Bitco
 
 - [Insight API](https://github.com/axerunners/insight-api/tree/master)
 - [Insight UI](https://github.com/axerunners/insight-ui/tree/master)
-- [Bitcore Wallet Service](https://github.com/axerunners/axecore-wallet-service/tree/master)
+- [Bitcore Wallet Service](https://github.com/AXErunners/bitcore-wallet-service-axe)
 
 ## Documentation
 
