@@ -87,7 +87,7 @@ There are several add-on services available to extend the functionality of Bitco
 
 - [Upgrade Notes](docs/upgrade.md)
 - [Services](docs/services.md)
-  - [Axed](docs/services/axed.md) - Interface to Axe Core
+  - [axed](docs/services/axed.md) - Interface to Axe Core
   - [Web](docs/services/web.md) - Creates an express application over which services can expose their web/API content
 - [Development Environment](docs/development.md) - Guide for setting up a development environment
 - [Node](docs/node.md) - Details on the node constructor
