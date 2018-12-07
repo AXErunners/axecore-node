@@ -20,7 +20,7 @@ If it doesn't exist, it will create it, with basic task to connect to axed.
 
 Some plugins are available :
 
-- Insight-API : `./bin/axecore-node addservice @axerunners/insight-api
+- Insight-API : `./bin/axecore-node addservice @axerunners/insight-api`
 - Insight-UI : `./bin/axecore-node addservice @axerunners/insight-ui`
 
 You also might want to add these index to your axe.conf file :
