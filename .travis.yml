@@ -1,9 +1,8 @@
 language: node_js
 sudo: false
 node_js:
-  - '6'
   - '8'
-
+  - '10'
 env:
   - CXX=g++-4.8 CC=gcc-4.8
 addons:
@@ -18,5 +17,3 @@ addons:
 script:
   - npm run test
   - npm run jshint
-after_success:
-  - npm run coveralls
