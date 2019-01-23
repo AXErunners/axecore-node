@@ -1,9 +1,7 @@
 AXEcore Node
 ============
-[![NPM Version](https://img.shields.io/npm/v/@axerunners/axecore-node.svg?branch=master)](https://npmjs.org/package/@axerunners/axecore-node)
-[![Build Status](https://travis-ci.com/charlesrocket/axecore-node.svg?branch=master)](https://travis-ci.com/charlesrocket/axecore-node)
 
-An AXE full node for building applications and services with Node.js. A node is extensible and can be configured to run additional services. At the minimum a node has an interface to [AXE Core (axed)](https://github.com/axerunners/axe) for more advanced address queries. Additional services can be enabled to make a node more useful such as exposing new APIs, running a block explorer and wallet service.
+A Axe full node for building applications and services with Node.js. A node is extensible and can be configured to run additional services. At the minimum a node has an interface to [Axe Core (axed) v1.2.0](https://github.com/axerunners/axe/tree/v0.13.0.x) for more advanced address queries. Additional services can be enabled to make a node more useful such as exposing new APIs, running a block explorer and wallet service.
 
 ## Usages
 
@@ -12,6 +10,7 @@ An AXE full node for building applications and services with Node.js. A node is 
 ```bash
 git clone https://github.com/axerunners/axecore-node
 cd axecore-node
+npm install
 ./bin/axecore-node start
 ```
 
@@ -51,8 +50,8 @@ node.on('ready', function() {
 
 ## Prerequisites
 
-- Axe Core (axed) (v0.12.1.x) with support for additional indexing *(see above)*
-- Node.js v0.10, v0.12, v4 or v5
+- Axe Core (axed) (v1.2.0) with support for additional indexing *(see above)*
+- Node.js v8+
 - ZeroMQ *(libzmq3-dev for Ubuntu/Debian or zeromq on OSX)*
 - ~20GB of disk storage
 - ~1GB of RAM
@@ -81,7 +80,7 @@ There are several add-on services available to extend the functionality of Bitco
 
 - [Insight API](https://github.com/axerunners/insight-api/tree/master)
 - [Insight UI](https://github.com/axerunners/insight-ui/tree/master)
-- [Bitcore Wallet Service](https://github.com/AXErunners/bitcore-wallet-service-axe)
+- [Bitcore Wallet Service](https://github.com/axerunners/axecore-wallet-service/tree/master)
 
 ## Documentation
 
