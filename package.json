@@ -46,7 +46,7 @@
     "axed"
   ],
   "dependencies": {
-    "@axerunners/axecore-lib": "^0.16.9",
+    "@axerunners/axecore-lib": "^0.16.10",
     "@axerunners/axed-rpc": "^1.2.1",
     "async": "^2.6.1",
     "body-parser": "^1.18.3",
