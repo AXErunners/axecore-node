@@ -1,6 +1,5 @@
+// jshint ignore: start
 'use strict';
-
-/* jshint sub: true */
 
 var path = require('path');
 var EventEmitter = require('events').EventEmitter;
@@ -106,7 +105,7 @@ describe('Axe Service', function() {
       var axed = new AxeService(baseConfig);
       var methods = axed.getAPIMethods();
       should.exist(methods);
-      methods.length.should.equal(23);
+      methods.length.should.equal(24);
     });
   });
 
@@ -3416,36 +3415,36 @@ describe('Axe Service', function() {
     });
   });
 
-  describe('#_paginateTxids', function() {
+  describe('#_paginate', function() {
     it('slice txids based on "from" and "to" (3 to 13)', function() {
       var axed = new AxeService(baseConfig);
       var txids = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-      var paginated = axed._paginateTxids(txids, 3, 13);
+      var paginated = axed._paginate(txids, 3, 13);
       paginated.should.deep.equal([3, 4, 5, 6, 7, 8, 9, 10]);
     });
     it('slice txids based on "from" and "to" (0 to 3)', function() {
       var axed = new AxeService(baseConfig);
       var txids = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-      var paginated = axed._paginateTxids(txids, 0, 3);
+      var paginated = axed._paginate(txids, 0, 3);
       paginated.should.deep.equal([0, 1, 2]);
     });
     it('slice txids based on "from" and "to" (0 to 1)', function() {
       var axed = new AxeService(baseConfig);
       var txids = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-      var paginated = axed._paginateTxids(txids, 0, 1);
+      var paginated = axed._paginate(txids, 0, 1);
       paginated.should.deep.equal([0]);
     });
     it('will throw error if "from" is greater than "to"', function() {
       var axed = new AxeService(baseConfig);
       var txids = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
       (function() {
-        axed._paginateTxids(txids, 1, 0);
+        axed._paginate(txids, 1, 0);
       }).should.throw('"from" (1) is expected to be less than "to"');
     });
     it('will handle string numbers', function() {
       var axed = new AxeService(baseConfig);
       var txids = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-      var paginated = axed._paginateTxids(txids, '1', '3');
+      var paginated = axed._paginate(txids, '1', '3');
       paginated.should.deep.equal([1, 2]);
     });
   });
@@ -3610,7 +3609,7 @@ describe('Axe Service', function() {
           })
         }
       });
-      sinon.spy(axed, '_paginateTxids');
+      sinon.spy(axed, '_paginate');
       axed.getAddressTxids = sinon.stub().callsArgWith(2, null, [txid1, txid2, txid3]);
       axed.getAddressBalance = sinon.stub().callsArgWith(2, null, {
         received: 30 * 1e8,
@@ -3619,9 +3618,9 @@ describe('Axe Service', function() {
       var address = '7oK6xjGeVK5YCT5dpqzNXGUag1bQadPAyT';
       var options = {};
       axed.getAddressSummary(address, options, function(err, summary) {
-        axed._paginateTxids.callCount.should.equal(1);
-        axed._paginateTxids.args[0][1].should.equal(0);
-        axed._paginateTxids.args[0][2].should.equal(1000);
+        axed._paginate.callCount.should.equal(1);
+        axed._paginate.args[0][1].should.equal(0);
+        axed._paginate.args[0][2].should.equal(1000);
         summary.appearances.should.equal(3);
         summary.totalReceived.should.equal(3000000000);
         summary.totalSpent.should.equal(1000000000);
@@ -3728,7 +3727,7 @@ describe('Axe Service', function() {
           getAddressMempool: getAddressMempool
         }
       });
-      sinon.spy(axed, '_paginateTxids');
+      sinon.spy(axed, '_paginate');
       axed.getAddressTxids = sinon.stub().callsArgWith(2, null, [txid1, txid2, txid3]);
       axed.getAddressBalance = sinon.stub().callsArgWith(2, null, {
         received: 30 * 1e8,
@@ -3743,7 +3742,7 @@ describe('Axe Service', function() {
         done();
       });
     });
-    it('will give error from _paginateTxids', function(done) {
+    it('will give error from _paginate', function(done) {
       var axed = new AxeService(baseConfig);
       var getAddressMempool = sinon.stub();
       axed.nodes.push({
@@ -3751,13 +3750,13 @@ describe('Axe Service', function() {
           getAddressMempool: getAddressMempool
         }
       });
-      sinon.spy(axed, '_paginateTxids');
+      sinon.spy(axed, '_paginate');
       axed.getAddressTxids = sinon.stub().callsArgWith(2, null, [txid1, txid2, txid3]);
       axed.getAddressBalance = sinon.stub().callsArgWith(2, null, {
         received: 30 * 1e8,
         balance: 20 * 1e8
       });
-      axed._paginateTxids = sinon.stub().throws(new Error('test'));
+      axed._paginate = sinon.stub().throws(new Error('test'));
       var address = '7oK6xjGeVK5YCT5dpqzNXGUag1bQadPAyT';
       var options = {
         queryMempool: false
