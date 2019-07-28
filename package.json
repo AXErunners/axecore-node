@@ -2,7 +2,7 @@
   "name": "@axerunners/axecore-node",
   "description": "Full node with extended capabilities using Axecore and Axe Core (axed)",
   "author": "AXErunners <info@axerunenrs.com>",
-  "version": "5.1.5",
+  "version": "5.1.6",
   "main": "./index.js",
   "repository": "git://github.com/axerunners/axecore-node.git",
   "homepage": "https://github.com/axerunners/axecore-node",
