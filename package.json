@@ -2,7 +2,7 @@
   "name": "@axerunners/axecore-node",
   "description": "Full node with extended capabilities using Axecore and Axe Core (axed)",
   "author": "AXErunners <info@axerunenrs.com>",
-  "version": "5.1.6",
+  "version": "5.1.7",
   "main": "./index.js",
   "repository": "git://github.com/axerunners/axecore-node.git",
   "homepage": "https://github.com/axerunners/axecore-node",
@@ -29,7 +29,7 @@
     "axed"
   ],
   "dependencies": {
-    "@axerunners/axecore-lib": "^0.17.8",
+    "@axerunners/axecore-lib": "^0.17.9",
     "@axerunners/axed-rpc": "^1.3.1",
     "async": "^2.6.2",
     "body-parser": "^1.19.0",
