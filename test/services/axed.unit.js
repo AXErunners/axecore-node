@@ -5082,10 +5082,14 @@ describe('Axe Service', function() {
   describe('#getInfo', function() {
     it('will give rpc error', function(done) {
       var axed = new AxeService(baseConfig);
+      var getBlockchainInfo = sinon.stub().callsArgWith(0, {message: 'error', code: -1});
+      var getNetworkInfo = sinon.stub().callsArgWith(0, {message: 'error', code: -1});
       var getInfo = sinon.stub().callsArgWith(0, {message: 'error', code: -1});
       axed.nodes.push({
         client: {
-          getInfo: getInfo
+          getInfo: getInfo,
+          getNetworkInfo: getNetworkInfo,
+          getBlockchainInfo: getBlockchainInfo,
         }
       });
       axed.getInfo(function(err) {
@@ -5097,23 +5101,35 @@ describe('Axe Service', function() {
     it('will call client getInfo and give result', function(done) {
       var axed = new AxeService(baseConfig);
       axed.node.getNetworkName = sinon.stub().returns('testnet');
-      var getInfo = sinon.stub().callsArgWith(0, null, {
+      var getNetworkInfo = sinon.stub().callsArgWith(0, null, {
         result: {
           version: 1,
           protocolversion: 1,
-          blocks: 1,
+          subversion: '/Axed-test:1.0.0/',
           timeoffset: 1,
           connections: 1,
-          proxy: '',
-          difficulty: 1,
-          testnet: true,
           relayfee: 10,
-          errors: ''
+          warnings: ''
         }
+      });
+
+      var getBlockchainInfo = sinon.stub().callsArgWith(0, null, {
+        result: {
+          bestblockhash: '00000000',
+          blocks: 1,
+          chain: 'test',
+          difficulty: 1,
+          warnings: ''
+        }
+      });
+      var getInfo = sinon.stub().callsArgWith(0, null, {
+        network: 'testnet'
       });
       axed.nodes.push({
         client: {
-          getInfo: getInfo
+          getInfo: getInfo,
+          getNetworkInfo: getNetworkInfo,
+          getBlockchainInfo: getBlockchainInfo,
         }
       });
       axed.getInfo(function(err, info) {
@@ -5121,14 +5137,15 @@ describe('Axe Service', function() {
           return done(err);
         }
         should.exist(info);
+        should.equal(info.bestBlockHash, '00000000');
         should.equal(info.version, 1);
+        should.equal(info.chain, 'test');
+        should.equal(info.subVersion, '/Axed-test:1.0.0/');
         should.equal(info.protocolVersion, 1);
         should.equal(info.blocks, 1);
         should.equal(info.timeOffset, 1);
         should.equal(info.connections, 1);
-        should.equal(info.proxy, '');
         should.equal(info.difficulty, 1);
-        should.equal(info.testnet, true);
         should.equal(info.relayFee, 10);
         should.equal(info.errors, '');
         info.network.should.equal('testnet');
@@ -5462,7 +5479,7 @@ describe('Axe Service', function() {
 
       axed.getMNList(function(err, MNList) {
         err.should.be.instanceof(Error);
-        console.log(err);
+        err.message.should.be.equal('Blockchain is not synced yet');
         done();
       });
     });
